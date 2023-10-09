@@ -220,18 +220,24 @@ add_action( 'wp_head', 'mytheme_customize_css');
  */
 
 function create_product_post_type(){
+    add_theme_support('post-thumbnails');
     $args = array(
         'labels' => array(
             'name' => __( 'Products'), 
-            'singular_name' => __( 'Product')
-        ),
+            'singular_name' => __( 'Product'),
+            'add_new_item' => 'Add New Product',
+            'edit_item' => 'Edit Product',
+            'all_items' => 'All Products',
+         ),
         'public' => true,
         'has_archive' => true,
         'rewrite' => array('slug' => 'products'),
         'show_in_rest' => true,
         'description' => 'Products availabe for sales in the bakery',
         'hierarchical' => true,
-        'supports' => array('title', 'editor', 'comments', 'thumbnails', 'authors', 'excerpt')
+        'supports' => array('title', 'editor', 'comments', 'thumbnail', 'author', 'excerpt'),
+        'taxonomies' => array('category')
+
     );
     register_post_type( 'products', $args);
 }
